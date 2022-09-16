@@ -37,4 +37,17 @@ public class ToDoService {
         }
         return toDoRepo.getToDoById(id);
     }
+
+    public ToDo editToDo(String id, ToDo toDoDetails) {
+        Map<String, ToDo> presentToDos = toDoRepo.getToDos();
+        ToDo toEditToDo = presentToDos.get(id);
+
+        toEditToDo.setStatus(toDoDetails.getStatus());
+        toEditToDo.setDescription(toDoDetails.getDescription());
+        return toDoRepo.editToDo(toEditToDo);
+    }
+
+    public ToDo deleteToDo(String id) {
+        return toDoRepo.deleteToDo(id);
+    }
 }

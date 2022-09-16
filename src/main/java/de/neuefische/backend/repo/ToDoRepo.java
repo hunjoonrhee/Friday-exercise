@@ -23,10 +23,21 @@ public class ToDoRepo {
     }
 
     public ToDo addNewToDo(ToDo toDo) {
-        return toDos.put(toDo.getId(), toDo);
+        toDos.put(toDo.getId(), toDo);
+        return toDo;
     }
 
     public Map<String, ToDo> getToDos() {
         return toDos;
+    }
+
+    public ToDo editToDo(ToDo toEditToDo) {
+        toDos.get(toEditToDo.getId()).setStatus(toEditToDo.getStatus());
+        toDos.get(toEditToDo.getId()).setDescription(toEditToDo.getDescription());
+        return toDos.get(toEditToDo.getId());
+    }
+
+    public ToDo deleteToDo(String id) {
+        return toDos.remove(id);
     }
 }
