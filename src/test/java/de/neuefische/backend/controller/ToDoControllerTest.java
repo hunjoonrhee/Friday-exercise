@@ -43,4 +43,54 @@ class ToDoControllerTest {
 
     }
 
+    @Test
+    void getToDoById_Returns_ToDoForGivenId() throws Exception {
+
+        // GIVEN
+        String expectedJson= """
+                
+                {
+                    "description": "Friday-Exercise",
+                    "status": "OPEN",
+                    "id": "1"
+                }
+                
+                
+                """;
+
+        // WHEN & THEN
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/todo/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(expectedJson));
+
+    }
+
+    @Test
+    void postNewToDo_Returns_AddedToDo() throws Exception{
+
+        //GIVEN
+        String requestBody = """
+                    {
+                        "description": "new to do",
+                        "status": "OPEN",
+                        "id": "2"
+                    }
+                """;
+
+        String expectedResponseBody = """
+                    {
+                        "description": "new to do",
+                        "status": "OPEN",
+                        "id": "2"
+                    }
+                """;
+
+        mockMvc.perform(
+                        post("/api/todo")
+                                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                                .content(requestBody))
+                .andExpect(status().isOk())
+                .andExpect(content().json(expectedResponseBody));
+    }
+
 }

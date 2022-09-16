@@ -34,4 +34,32 @@ class ToDoServiceTest {
 
     }
 
+    @Test
+    void getToDoById_Returns_ToDoForGivenId(){
+        // GIVEN
+        ToDo toDo = new ToDo("Friday-Exercise","OPEN" , "1");
+        when(toDoRepo.getToDoById("1")).thenReturn(toDo);
+        // WHEN
+
+        ToDo actual = toDoService.getToDoById("1");
+        // THEN
+
+        assertEquals(toDo, actual);
+
+    }
+
+    @Test
+    void postNewToDo_Returns_AddedToDo(){
+        // GIVEN
+        ToDo toDo = new ToDo("Friday-Exercise","OPEN" , "1");
+        when(toDoRepo.addNewToDo(toDo)).thenReturn(toDo);
+        // WHEN
+
+        ToDo actual = toDoService.postNewToDo(toDo);
+        // THEN
+
+        assertEquals(toDo, actual);
+
+    }
+
 }
