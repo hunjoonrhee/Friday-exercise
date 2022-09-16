@@ -19,7 +19,7 @@ public class ToDoController {
         this.service = service;
     }
 
-//    public List<ToDo> getAllToDos(){
-//        return service.getAllToDos();
-//    }
+    public List<ToDo> getAllToDos(){
+        return service.getAllToDos();
+    }
 }
