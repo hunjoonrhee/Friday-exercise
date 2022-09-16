@@ -22,4 +22,11 @@ public class ToDoRepo {
         return toDos.get(id);
     }
 
+    public ToDo addNewToDo(ToDo toDo) {
+        return toDos.put(toDo.getId(), toDo);
+    }
+
+    public Map<String, ToDo> getToDos() {
+        return toDos;
+    }
 }
