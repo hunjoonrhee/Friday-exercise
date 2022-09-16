@@ -11,7 +11,7 @@ import java.util.Map;
 @NoArgsConstructor
 public class ToDo {
 
-    private String todo;
+    private String description;
     private String status;
     private String id;
 }
