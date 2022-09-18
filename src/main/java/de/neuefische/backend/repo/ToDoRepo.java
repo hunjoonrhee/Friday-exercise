@@ -31,10 +31,10 @@ public class ToDoRepo {
         return toDos;
     }
 
-    public ToDo editToDo(ToDo toEditToDo) {
-        toDos.get(toEditToDo.getId()).setStatus(toEditToDo.getStatus());
-        toDos.get(toEditToDo.getId()).setDescription(toEditToDo.getDescription());
-        return toDos.get(toEditToDo.getId());
+    public ToDo editToDo(ToDo editedToDo) {
+        toDos.get(editedToDo.getId()).setStatus(editedToDo.getStatus());
+        toDos.get(editedToDo.getId()).setDescription(editedToDo.getDescription());
+        return toDos.get(editedToDo.getId());
     }
 
     public ToDo deleteToDo(String id) {
