@@ -1,6 +1,7 @@
 package de.neuefische.backend.service;
 
 import de.neuefische.backend.model.ToDo;
+import de.neuefische.backend.model.ToDoDto;
 import de.neuefische.backend.repo.ToDoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,26 +9,33 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @Service
 public class ToDoService {
 
     private ToDoRepo toDoRepo;
-    @Autowired
-    public ToDoService(ToDoRepo toDoRepo) {
+    private IdService idService;
+
+    public ToDoService(ToDoRepo toDoRepo, IdService idService) {
         this.toDoRepo = toDoRepo;
+        this.idService = idService;
     }
+
+    @Autowired
+
 
     public List<ToDo> getAllToDos(){
         return toDoRepo.getAllToDos();
     }
 
-    public ToDo postNewToDo(ToDo toDo) {
-        Map<String, ToDo> presentToDos = toDoRepo.getToDos();
-        int newId1 = presentToDos.size()+1;
-        String newId = String.valueOf(newId1);
-        toDo.setId(newId);
-        return toDoRepo.addNewToDo(toDo);
+    public ToDo postNewToDo(ToDoDto toDo) {
+        ToDo newToDo = ToDo.builder()
+                .status(toDo.getStatus())
+                .description(toDo.getDescription())
+                .id(idService.generateID())
+                .build();
+        return toDoRepo.addNewToDo(newToDo);
     }
 
     public ToDo getToDoById(String id) {
@@ -38,12 +46,7 @@ public class ToDoService {
         return toDoRepo.getToDoById(id);
     }
 
-    public ToDo editToDo(String id, ToDo toDoDetails) {
-        Map<String, ToDo> presentToDos = toDoRepo.getToDos();
-        ToDo toEditToDo = presentToDos.get(id);
-
-        toEditToDo.setStatus(toDoDetails.getStatus());
-        toEditToDo.setDescription(toDoDetails.getDescription());
+    public ToDo editToDo(ToDo toEditToDo) {
         return toDoRepo.editToDo(toEditToDo);
     }
 

@@ -1,6 +1,7 @@
 package de.neuefische.backend.controller;
 
 import de.neuefische.backend.model.ToDo;
+import de.neuefische.backend.model.ToDoDto;
 import de.neuefische.backend.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +30,13 @@ public class ToDoController {
 
 
     @PostMapping
-    public ToDo postNewToDo(@RequestBody ToDo toDo){
-        return service.postNewToDo(toDo);
+    public ToDo postNewToDo(@RequestBody ToDoDto toDoDto){
+        return service.postNewToDo(toDoDto);
     }
 
     @PutMapping("{id}")
     public ToDo editToDo(@PathVariable String id, @RequestBody ToDo toDoDetails){
-        return service.editToDo(id, toDoDetails);
+        return service.editToDo(toDoDetails);
     }
 
     @DeleteMapping("{id}")

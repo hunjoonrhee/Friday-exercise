@@ -1,6 +1,7 @@
 package de.neuefische.backend.repo;
 
 import de.neuefische.backend.model.ToDo;
+import de.neuefische.backend.model.ToDoDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,8 +12,7 @@ import java.util.Map;
 @Repository
 public class ToDoRepo {
 
-    private Map<String, ToDo> toDos = new HashMap<>(
-            Map.of("1", new ToDo("Friday-Exercise","OPEN" , "1")));
+    private Map<String, ToDo> toDos = new HashMap<>();
 
     public List<ToDo> getAllToDos() {
         return new ArrayList<ToDo>(toDos.values());
@@ -32,9 +32,8 @@ public class ToDoRepo {
     }
 
     public ToDo editToDo(ToDo editedToDo) {
-        toDos.get(editedToDo.getId()).setStatus(editedToDo.getStatus());
-        toDos.get(editedToDo.getId()).setDescription(editedToDo.getDescription());
-        return toDos.get(editedToDo.getId());
+        toDos.put(editedToDo.getId(), editedToDo);
+        return editedToDo;
     }
 
     public ToDo deleteToDo(String id) {
